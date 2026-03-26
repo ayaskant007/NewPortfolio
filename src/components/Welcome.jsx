@@ -64,7 +64,10 @@ const Welcome = () => {
     const titleCleanup = setupTextHover(titleRef.current, "title");
     const subtitleCleanup = setupTextHover(subtitleRef.current, "subtitle");
 
-    return titleCleanup && subtitleCleanup;
+    return () => {
+      titleCleanup();
+      subtitleCleanup();
+    };
   }, []);
 
   return (
