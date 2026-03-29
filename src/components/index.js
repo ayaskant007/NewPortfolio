@@ -6,5 +6,6 @@ import Desktop from "./Desktop.jsx";
 import Spotlight from "./Spotlight.jsx";
 import ContextMenu from "./ContextMenu.jsx";
 import ErrorBoundary from "./ErrorBoundary.jsx";
+import BootLoading from "./BootLoading.jsx";
 
-export { Navbar, Welcome, Dock, WindowControls, Desktop, Spotlight, ContextMenu, ErrorBoundary }
+export { Navbar, Welcome, Dock, WindowControls, Desktop, Spotlight, ContextMenu, ErrorBoundary, BootLoading }

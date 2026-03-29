@@ -25,7 +25,7 @@ const Settings = () => {
     };
 
     return (
-        <div className="w-[600px] h-[400px] bg-white/50 dark:bg-black/50 text-black dark:text-white flex flex-col relative select-none">
+        <div className="w-full h-full bg-white/5 dark:bg-black/10 text-black dark:text-white flex flex-col relative select-none min-w-[600px] min-h-[400px]">
             <div id="window-header" className="flex items-center justify-between px-4 py-3 bg-white/40 dark:bg-black/30 backdrop-blur-md border-b border-black/10 dark:border-white/10 shrink-0">
                 <div className="flex-1"></div>
                 <span className="font-semibold absolute left-1/2 -translate-x-1/2">System Settings</span>

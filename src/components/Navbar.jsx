@@ -52,7 +52,7 @@ const Navbar = () => {
           className="fixed inset-0 pointer-events-none z-[99999] transition-opacity duration-300" 
           style={{ backgroundColor: 'black', opacity: 1 - brightness / 100 }}
         ></div>
-        <nav className="fixed top-0 w-full z-[9999] flex justify-between items-center bg-white/60 dark:bg-black/40 text-black dark:text-gray-100 backdrop-blur-2xl p-1 px-4 select-none border-b border-black/10 dark:border-white/10">
+        <nav className="fixed top-0 w-full z-[9999] flex justify-between items-center bg-white/40 dark:bg-black/60 text-black dark:text-gray-100 backdrop-blur-3xl p-1 px-4 select-none border-b border-white/10 saturate-150 shadow-sm">
             <div className="flex items-center gap-4">
                 <img src="/images/logo.svg" alt="Logo" className="w-4 hover:opacity-70 cursor-pointer dark:invert" />
                 <p className="font-bold text-sm cursor-pointer hover:opacity-70">{activeAppName}</p>

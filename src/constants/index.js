@@ -44,8 +44,14 @@ const dockApps = [
   },
   {
     id: "safari",
-    name: "Articles", 
+    name: "Safari", 
     icon: "safari.png",
+    canOpen: true,
+  },
+  {
+    id: "journals",
+    name: "Journals", 
+    icon: "news.png",
     canOpen: true,
   },
   {
@@ -452,6 +458,7 @@ const WINDOW_CONFIG = {
   contact: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   resume: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   safari: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+  journals: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   photos: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },

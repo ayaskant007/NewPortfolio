@@ -212,7 +212,7 @@ const RealTerminal = () => {
     };
 
     return (
-        <div className="w-[700px] h-[500px] bg-[#0c0c0c]/90 text-green-400 font-mono flex flex-col relative overflow-hidden" onClick={() => inputRef.current?.focus()}>
+        <div className="w-full h-full bg-[#0c0c0c]/90 text-green-400 font-mono flex flex-col relative overflow-hidden min-w-[600px] min-h-[400px]" onClick={() => inputRef.current?.focus()}>
             {/* Header mapped via standard macOS wrapper UI but customized inside */}
             <div id="window-header" className="flex items-center justify-between px-4 py-3 bg-[#1a1a1a] border-b border-white/10 select-none">
                 <div className="flex items-center gap-2 text-green-500">
