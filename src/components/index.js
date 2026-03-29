@@ -1,11 +1,7 @@
-import Navbar from "./Navbar.jsx";
-import Welcome from "./Welcome.jsx";
-import Dock from "./Dock.jsx";
-import WindowControls from "./WindowControls";
-import Desktop from "./Desktop.jsx";
-import Spotlight from "./Spotlight.jsx";
-import ContextMenu from "./ContextMenu.jsx";
-import ErrorBoundary from "./ErrorBoundary.jsx";
-import BootLoading from "./BootLoading.jsx";
+import Navbar from "#components/Navbar.jsx";
+import Welcome from "#components/Welcome.jsx";
+import Dock from "#components/Dock.jsx";
+import WindowControls from "#components/WindowControls";
+import Desktop from "#components/Desktop.jsx";
 
-export { Navbar, Welcome, Dock, WindowControls, Desktop, Spotlight, ContextMenu, ErrorBoundary, BootLoading }
+export { Navbar, Welcome, Dock, WindowControls, Desktop }

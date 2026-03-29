@@ -38,49 +38,37 @@ const navIcons = [
 const dockApps = [
   {
     id: "finder",
-    name: "Finder", 
+    name: "Portfolio", // was "Finder"
     icon: "finder.png",
     canOpen: true,
   },
   {
     id: "safari",
-    name: "Safari", 
+    name: "Articles", // was "Safari"
     icon: "safari.png",
     canOpen: true,
   },
   {
-    id: "journals",
-    name: "Journals", 
-    icon: "news.png",
-    canOpen: true,
-  },
-  {
     id: "photos",
-    name: "Gallery", 
+    name: "Gallery", // was "Photos"
     icon: "photos.png",
     canOpen: true,
   },
   {
     id: "contact",
-    name: "Contact", 
+    name: "Contact", // or "Get in touch"
     icon: "contact.png",
     canOpen: true,
   },
   {
-    id: "realterminal",
-    name: "Terminal", 
+    id: "terminal",
+    name: "Skills", // was "Terminal"
     icon: "terminal.png",
     canOpen: true,
   },
   {
-    id: "settings",
-    name: "System Settings",
-    icon: "settings.png", // We will deal with asset later or use empty placeholder
-    canOpen: true,
-  },
-  {
     id: "trash",
-    name: "Trash",
+    name: "Archive", // was "Trash"
     icon: "trash.png",
     canOpen: false,
   },
@@ -113,20 +101,28 @@ const blogPosts = [
 
 const techStack = [
   {
-    category: "Frameworks & Libs",
-    items: ["Next.js 16", "React Three Fiber", "Tailwind CSS v4", "Framer Motion", "GSAP", "Matter.js"],
+    category: "Frontend",
+    items: ["React.js", "Next.js", "TypeScript"],
   },
   {
-    category: "Languages",
-    items: ["JavaScript", "TypeScript", "Python", "C#"],
+    category: "Mobile",
+    items: ["React Native", "Expo"],
   },
   {
-    category: "Game Dev",
-    items: ["Unity", "Ren'Py"],
+    category: "Styling",
+    items: ["Tailwind CSS", "Sass", "CSS"],
   },
   {
-    category: "Tools",
-    items: ["Git", "GitHub", "Digital Art"],
+    category: "Backend",
+    items: ["Node.js", "Express", "NestJS", "Hono"],
+  },
+  {
+    category: "Database",
+    items: ["MongoDB", "PostgreSQL"],
+  },
+  {
+    category: "Dev Tools",
+    items: ["Git", "GitHub", "Docker"],
   },
 ];
 
@@ -136,21 +132,28 @@ const socials = [
     text: "Github",
     icon: "/icons/github.svg",
     bg: "#f4656b",
-    link: "https://github.com/ayaskant007",
+    link: "https://github.com/JavaScript-Mastery-Pro",
   },
   {
     id: 2,
-    text: "Live Site",
+    text: "Platform",
     icon: "/icons/atom.svg",
     bg: "#4bcb63",
-    link: "https://ayaskant007.is-a.dev/",
+    link: "https://jsmastery.com/",
   },
   {
     id: 3,
-    text: "Email",
-    icon: "/icons/mode.svg",
+    text: "Twitter/X",
+    icon: "/icons/twitter.svg",
     bg: "#ff866b",
-    link: "mailto:contact@ayaskant.dev",
+    link: "https://x.com/jsmasterypro",
+  },
+  {
+    id: 4,
+    text: "LinkedIn",
+    icon: "/icons/linkedin.svg",
+    bg: "#05b6f6",
+    link: "https://www.linkedin.com/company/javascriptmastery/posts/?feedView=all",
   },
 ];
 
@@ -219,49 +222,63 @@ const WORK_LOCATION = {
   icon: "/icons/work.svg",
   kind: "folder",
   children: [
+    // ▶ Project 1
     {
       id: 5,
-      name: "Parano!a",
+      name: "Nike Ecommerce Website Application",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-10 left-5",
-      windowPosition: "top-[5vh] left-5",
+      position: "top-10 left-5", // icon position inside Finder
+      windowPosition: "top-[5vh] left-5", // optional: Finder window position
       children: [
         {
           id: 1,
-          name: "Parano!a.txt",
+          name: "Nike Project.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
           position: "top-5 left-10",
           description: [
-            "A psychological thriller game with 3 intense levels. Experience fear and uncertainty in this immersive journey.",
-            "Built with Unity and C# alongside intense 3D Modeling."
+            "The Nike eCommerce website is a sleek and modern platform designed for shopping the latest Nike collections.",
+            "Instead of a simple online store, it delivers an immersive experience with bold visuals, interactive product displays, and smooth navigation.",
+            "Think of it like walking into a flagship Nike store—but right from your phone or laptop.",
+            "It's built with Next.js and Tailwind, ensuring fast performance, responsive design, and a clean, premium look.",
           ],
         },
         {
           id: 2,
-          name: "Source Code",
+          name: "nike.com",
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://github.com/foglomon/Paranoia",
+          href: "https://youtu.be/fZdTYswuZjU?si=Awjl-pIst9e09_UU",
           position: "top-10 right-20",
         },
         {
           id: 4,
-          name: "preview.png",
+          name: "nike.png",
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
           position: "top-52 right-80",
-          imageUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=2070",
+          imageUrl: "/images/project-1.png",
+        },
+        {
+          id: 5,
+          name: "Design.fig",
+          icon: "/images/plain.png",
+          kind: "file",
+          fileType: "fig",
+          href: "https://google.com",
+          position: "top-60 right-20",
         },
       ],
     },
+
+    // ▶ Project 2
     {
       id: 6,
-      name: "Vikas Bhi, Virasat Bhi",
+      name: "AI Resume Analyzer",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-52 right-80",
@@ -269,40 +286,52 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "Vikas Bhi.txt",
+          name: "AI Resume Analyzer Project.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
           position: "top-5 right-10",
           description: [
-            "Responsive website for CRYPTICON 2025.",
-            "Powered by GSAP 3 for smooth animations and hosted on Netlify.",
-            "Stack includes HTML, CSS, JS, and GSAP 3."
+            "AI Resume Analyzer is a smart tool that helps you perfect your resume with instant feedback.",
+            "Instead of guessing what recruiters want, you get AI-powered insights on keywords, formatting, and overall impact.",
+            "Think of it like having a career coach—pointing out strengths, fixing weaknesses, and boosting your chances of landing interviews.",
+            "It's built with Next.js and Tailwind, so it runs fast, looks professional, and works seamlessly on any device.",
           ],
         },
         {
           id: 2,
-          name: "Website.url",
+          name: "ai-resume-analyzer.com",
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://vikasvirasat.netlify.app/",
+          href: "https://youtu.be/iYOz165wGkQ?si=R1hs8Legl200m0Cl",
           position: "top-20 left-20",
         },
         {
           id: 4,
-          name: "preview.png",
+          name: "ai-resume-analyzer.png",
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
           position: "top-52 left-80",
-          imageUrl: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&q=80&w=2070",
+          imageUrl: "/images/project-2.png",
+        },
+        {
+          id: 5,
+          name: "Design.fig",
+          icon: "/images/plain.png",
+          kind: "file",
+          fileType: "fig",
+          href: "https://google.com",
+          position: "top-60 left-5",
         },
       ],
     },
+
+    // ▶ Project 3
     {
       id: 7,
-      name: "The Last Ember",
+      name: "Food Delivery App",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-80",
@@ -310,34 +339,44 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "The Last Ember.txt",
+          name: "Food Delivery App Project.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
           position: "top-5 left-10",
           description: [
-            "A narrative-driven game built using Ren'Py.",
-            "Explore a story of survival and sacrifice wrapped in beautiful Digital Art.",
-            "Programmed entirely in Python."
+            "Our Food Delivery App is a fast and convenient way to order meals from your favorite restaurants.",
+            "Instead of making calls or waiting in line, you can browse menus, customize orders, and track deliveries in real time.",
+            "Think of it like having your favorite restaurants in your pocket—ready to deliver anytime, anywhere.",
+            "It’s built with React Native, so it works smoothly on both iOS and Android with a clean, modern design.",
           ],
         },
         {
           id: 2,
-          name: "Source Code",
+          name: "food-delivery-app.com",
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://github.com/ayaskant007/The-Last-Ember",
+          href: "https://youtu.be/LKrX390fJMw?si=cExkuVhf2DTV9G2-",
           position: "top-10 right-20",
         },
         {
           id: 4,
-          name: "preview.png",
+          name: "food-delivery-app.png",
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
           position: "top-52 right-80",
-          imageUrl: "https://images.unsplash.com/photo-1496564203457-11bb12075d90?auto=format&fit=crop&q=80&w=2070",
+          imageUrl: "/images/project-3.png",
+        },
+        {
+          id: 5,
+          name: "Design.fig",
+          icon: "/images/plain.png",
+          kind: "file",
+          fileType: "fig",
+          href: "https://google.com",
+          position: "top-60 right-20",
         },
       ],
     },
@@ -388,10 +427,10 @@ const ABOUT_LOCATION = {
       subtitle: "Meet the Developer Behind the Code",
       image: "/images/adrian.jpg",
       description: [
-        "Hey! I’m Ayaskant 👋, a Developer of various disciplines who enjoys building high-performance web experiences, games, and interactive software.",
-        "I specialize in Next.js, React Three Fiber, and Unity—and I love making things feel smooth, fast, and highly immersive.",
-        "I’m big on merging clean UI design with robust code.",
-        "Outside of dev work, you'll find me building games using C# and Python, sipping coffee, and hacking in the matrix!",
+        "Hey! I’m Adrian 👋, a web developer who enjoys building sleek, interactive websites that actually work well.",
+        "I specialize in JavaScript, React, and Next.js—and I love making things feel smooth, fast, and just a little bit delightful.",
+        "I’m big on clean UI, good UX, and writing code that doesn’t need a search party to debug.",
+        "Outside of dev work, you'll find me tweaking layouts at 2AM, sipping overpriced coffee, or impulse-buying gadgets I absolutely convinced myself I needed 😅",
       ],
     },
   ],
@@ -458,13 +497,10 @@ const WINDOW_CONFIG = {
   contact: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   resume: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   safari: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  journals: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   photos: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  settings: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  realterminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
 
 export { INITIAL_Z_INDEX, WINDOW_CONFIG };
