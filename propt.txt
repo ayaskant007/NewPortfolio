@@ -1,0 +1,68 @@
+Role & Objective:
+You are an expert Frontend Architect specializing in React, GSAP, Tailwind CSS, and ultra-high-fidelity UI/UX cloning. Your goal is to transform a baseline macOS-style portfolio (based on the JS Mastery tutorial) into a true 1:1 replica of modern macOS (Tahoe/Sonoma/Sequoia aesthetic). It must be the most fluid, highly functional, and visually stunning web-based OS portfolio in existence.
+
+CRITICAL DATA RULE:
+Do absolutely NOT use any placeholder text, skills, or resume data from the current macOS tutorial codebase. You must read the root folder of my workspace, locate the old-portfolio directory, extract my actual personal data, skills, and project info, and dynamically inject them into this new macOS portfolio.
+
+Execute the following upgrades systematically:
+
+1. The Boot Sequence & Welcome Experience
+Apple Boot Screen: Implement a realistic macOS startup sequence. On initial load, display a pure black screen with a crisp white Apple logo and a filling progress bar.
+
+The "Hello" + Hover Effect: Once the progress bar fills, transition smoothly into the iconic Apple iMac cursive "hello" animation using GSAP to draw the SVG paths. Crucially: Integrate this with the existing on-hover text reveal/color effect from the original tutorial codebase. The user should see the SVG draw in, but hovering over it should still trigger the original interactive effect.
+
+2. Authentic Apple Aesthetics & Liquid Glass
+True Glassmorphism: Replace all basic transparent backgrounds with proper Apple liquid glass effects using Tailwind (backdrop-blur-3xl, bg-white/10 for light mode, bg-black/40 for dark mode, with subtle 1px white/gray inner borders to simulate glass reflection and depth).
+
+Fluidity & Physics: Ensure all open, close, and drag animations use custom GSAP easing (e.g., custom cubic-bezier curves) that perfectly mimics the weight, resistance, and bounce of macOS.
+
+3. Safari & App Integrations
+The Real Safari: Completely overhaul the Safari app. It must look exactly like the macOS Tahoe Safari browser, featuring a liquid glass toolbar, functional tabs, and a real URL address bar. Use an iframe to allow users to actually browse safe websites directly inside your portfolio.
+
+App Migration (Blog): Move the current "blog/article" content out of Safari. Create a new Journal app that uses a classic macOS sidebar layout to display this blog content, ensuring Safari remains a dedicated web browser.
+
+The Real Terminal: Delete the fake text-based terminal in the current codebase. Import the functional terminal component from my old-portfolio directory. Integrate it perfectly into the macOS window wrapper, ensuring its input field automatically focuses when opened.
+
+Finder & The Trash: Map the current "Archive" dock icon to open a Finder window that specifically navigates to a "Trash" view, displaying discarded items or older, deprecated projects.
+
+4. Window State Management & "Traffic Lights"
+Traffic Light Controls: Update the red, yellow, and green window buttons. When hovering over the parent container, smoothly reveal the x (close), - (minimize), and  (fullscreen) icons.
+
+Maximize/Minimize & Genie Effect: Implement fully functional maximize (expands to fill the screen minus dock and top bar). When minimized, use GSAP to implement the signature macOS "Genie" effect, warping the window down into the respective app icon in the Dock.
+
+Z-Index & Focus: Implement a global window state manager. Clicking any open window must immediately bring it to the front, applying a "focused" drop-shadow and dimming the drop-shadows of background windows.
+
+5. Navbar, Control Center & Settings
+Interactive Top Bar: The Top Bar left-side links (Project, Contact, Resume) must be converted into clickable buttons that trigger native-looking macOS dropdown menus. The bold app name next to the Apple logo must change dynamically based on the currently focused window.
+
+The Control Center: Build a highly detailed Control Center triggered by the icon in the top right. It needs a glassmorphism grid layout containing:
+
+Clickable pill toggles for Wi-Fi, Bluetooth, and AirDrop.
+
+A Dark/Light mode toggle.
+
+Draggable sliders for Display Brightness (controls a global CSS overlay) and Sound.
+
+System Settings App: Create a Settings app triggered by the Settings icon in the Dock, featuring a sidebar layout. Include functional tabs for Appearance (Dark/Light/Auto) and Wallpaper (a grid of 3-4 macOS wallpapers that instantly update the desktop background).
+
+6. "World's Best" Premium Additions (Tahoe Exclusives)
+Desktop Widgets: Implement a widget layer on the desktop. Allow the user to see a beautifully designed Clock, Calendar, and Weather widget that sit on the wallpaper beneath the active windows.
+
+Notification Center: Add a Notification Center that slides in from the right side of the screen when clicking the Date/Time in the top bar, displaying a welcome message and interactive widgets.
+
+Spotlight Search: Implement a global event listener for Cmd + Space (or Ctrl + Space). Blur the background and bring up a Spotlight search bar to instantly launch apps (Projects, Terminal, Settings, etc.).
+
+Draggable Constraints & Context Menu: Ensure GSAP draggable windows cannot be dragged completely off the viewport. Implement a custom right-click menu on the desktop wallpaper to "Change Wallpaper", "Toggle Dark Mode", or "Open Terminal".
+
+Implementation Strategy:
+Do not write the entire codebase in one single output. Begin by analyzing my old-portfolio data to secure my real content. Then, execute in this order:
+
+The Boot Sequence & Core GSAP State Management
+
+Top Bar, Control Center, and Context Menus
+
+App Migrations (Safari iframe, Terminal integration, Notes/Blog app)
+
+Desktop Widgets & Spotlight Search
+
+Ask for my review after completing each major logical step to ensure the liquid glass and physics feel perfectly native.
