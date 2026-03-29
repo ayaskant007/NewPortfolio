@@ -1,34 +1,22 @@
-"use client";
-
-import { chatWithAI } from "@/app/actions/chat";
-
 import React, { useEffect, useRef, useState } from "react";
-import { X, Terminal as TerminalIcon } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Terminal as TerminalIcon } from "lucide-react";
+import WindowControls from "#components/WindowControls";
+import WindowWrapper from "#hoc/WindowWrapper";
 
-type CommandOutput = {
-    type: "input" | "output" | "error" | "success";
-    content: React.ReactNode;
-};
-
-export default function Terminal() {
-    const [isOpen, setIsOpen] = useState(false);
+const RealTerminal = () => {
     const [input, setInput] = useState("");
     const [isChatMode, setIsChatMode] = useState(false);
     const [isSymphonyMode, setIsSymphonyMode] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
-    const [history, setHistory] = useState<CommandOutput[]>([
+    const [history, setHistory] = useState([
         { type: "output", content: "AyaskantOS [Version 2.0.0]" },
         { type: "output", content: "(c) 2026 Ayaskant Sahoo. All rights reserved." },
         { type: "success", content: 'Type "help" for a list of valid commands.' }
     ]);
-    const inputRef = useRef<HTMLInputElement>(null);
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const [konamiKeys, setKonamiKeys] = useState<string[]>([]);
-    const KONAMI_CODE = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
-    const matrixInterval = useRef<NodeJS.Timeout | null>(null);
+    const inputRef = useRef(null);
+    const scrollRef = useRef(null);
+    const matrixInterval = useRef(null);
 
-    // Cleanup on unmount
     useEffect(() => {
         return () => {
             if (matrixInterval.current) clearInterval(matrixInterval.current);
@@ -45,43 +33,15 @@ export default function Terminal() {
     };
 
     useEffect(() => {
-        const handleOpenEvent = () => setIsOpen(true);
-        window.addEventListener("open-terminal", handleOpenEvent);
-
-        const handleKeyDown = (e: KeyboardEvent) => {
-            // Konami Code Listener
-            setKonamiKeys(prev => {
-                const newKeys = [...prev, e.key];
-                if (newKeys.length > KONAMI_CODE.length) newKeys.shift();
-                if (JSON.stringify(newKeys) === JSON.stringify(KONAMI_CODE)) {
-                    setIsOpen(true);
-                }
-                return newKeys;
-            });
-        };
-
-        window.addEventListener("keydown", handleKeyDown);
-        return () => {
-            window.removeEventListener("open-terminal", handleOpenEvent);
-            window.removeEventListener("keydown", handleKeyDown);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (isOpen && inputRef.current) {
-            // Small delay to allow animation to start before focusing
-            setTimeout(() => inputRef.current?.focus(), 100);
-        }
         if (scrollRef.current) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
-    }, [history, isOpen, isTyping]);
+    }, [history, isTyping]);
 
-    const handleCommand = async (cmd: string) => {
+    const handleCommand = async (cmd) => {
         const trimmed = cmd.trim().toLowerCase();
-        const newHistory = [...history, { type: "input", content: cmd } as CommandOutput];
+        const newHistory = [...history, { type: "input", content: cmd }];
 
-        // Handle Symphony Mode
         if (isSymphonyMode) {
             setIsSymphonyMode(false);
             if (trimmed === "57186706") {
@@ -93,11 +53,10 @@ export default function Terminal() {
             return;
         }
 
-        // Handle AI Chat Mode
         if (isChatMode) {
             if (trimmed === "exit") {
                 setIsChatMode(false);
-                setHistory(prev => [...prev, { type: "input", content: cmd } as CommandOutput, { type: "success", content: "AI Connection Terminated." }]);
+                setHistory(prev => [...prev, { type: "input", content: cmd }, { type: "success", content: "AI Connection Terminated." }]);
                 setInput("");
                 return;
             }
@@ -106,18 +65,10 @@ export default function Terminal() {
             setInput("");
             setIsTyping(true);
 
-            try {
-                const response = await chatWithAI(cmd);
+            setTimeout(() => {
                 setIsTyping(false);
-                if (response.success) {
-                    setHistory(prev => [...prev, { type: "output", content: <span className="text-cyan-300">{response.success}</span> }]);
-                } else {
-                    setHistory(prev => [...prev, { type: "error", content: response.error }]);
-                }
-            } catch (e) {
-                setIsTyping(false);
-                setHistory(prev => [...prev, { type: "error", content: "Transmission disrupted." }]);
-            }
+                setHistory(prev => [...prev, { type: "output", content: <span className="text-cyan-300">Uplink simulated: I am offline in this environment. Try native web commands.</span> }]);
+            }, 1000);
             return;
         }
 
@@ -138,7 +89,6 @@ export default function Terminal() {
                                 <li><span className="text-green-400">coffee</span> - Fuel the dev</li>
                                 <li><span className="text-green-400">stop</span> - Stop running processes</li>
                                 <li><span className="text-green-400">clear</span> - Clear output</li>
-                                <li><span className="text-green-400">exit</span> - Close terminal</li>
                             </ul>
                         </div>
                     )
@@ -228,8 +178,7 @@ export default function Terminal() {
                         const chars = "010101010101010101010101010101";
                         const line = Array(50).fill(0).map(() => chars[Math.floor(Math.random() * chars.length)]).join("");
                         setHistory(prev => {
-                            // Keep history minimal during matrix to prevent overflow
-                            const updated = [...prev, { type: "output", content: <span className="text-green-900 opacity-50">{line}</span> } as CommandOutput];
+                            const updated = [...prev, { type: "output", content: <span className="text-green-900 opacity-50">{line}</span> }];
                             if (updated.length > 100) return updated.slice(updated.length - 100);
                             return updated;
                         });
@@ -249,10 +198,6 @@ export default function Terminal() {
                 stopMatrix();
                 setHistory([]);
                 return;
-            case "exit":
-                stopMatrix();
-                setIsOpen(false);
-                return;
             case "sudo":
                 newHistory.push({ type: "error", content: "nice try." });
                 break;
@@ -267,93 +212,74 @@ export default function Terminal() {
     };
 
     return (
-        <AnimatePresence>
-            {isOpen && (
-                <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 backdrop-blur-sm bg-black/50">
-                    <motion.div
-                        initial={{ scaleY: 0.005, scaleX: 0, opacity: 0 }}
-                        animate={{
-                            scaleY: [0.005, 0.005, 1],
-                            scaleX: [0, 1, 1],
-                            opacity: [0, 1, 1]
-                        }}
-                        exit={{
-                            scaleY: [1, 0.005, 0.005],
-                            scaleX: [1, 1, 0],
-                            opacity: [1, 1, 0]
-                        }}
-                        transition={{ duration: 0.4, times: [0, 0.4, 1], ease: "easeInOut" }}
-                        className="w-full max-w-3xl h-[80vh] bg-[#0c0c0c] border border-green-800 rounded-lg shadow-2xl flex flex-col overflow-hidden relative terminal-scanline"
-                    >
-                        {/* Header */}
-                        <div className="flex items-center justify-between px-4 py-2 bg-[#1a1a1a] border-b border-green-900">
-                            <div className="flex items-center gap-2 text-green-500">
-                                <TerminalIcon size={16} />
-                                <span className="font-bold">root@ayaskant-portfolio:~</span>
-                            </div>
-                            <button onClick={() => { stopMatrix(); setIsOpen(false); }} className="text-green-700 hover:text-green-500">
-                                <X size={20} />
-                            </button>
-                        </div>
-
-                        {/* Body */}
-                        <div
-                            ref={scrollRef}
-                            className="flex-1 p-4 overflow-y-auto space-y-2 text-green-400 font-mono scrollbar-thin scrollbar-thumb-green-900 scrollbar-track-transparent"
-                            onClick={() => inputRef.current?.focus()}
-                        >
-                            {history.map((entry, i) => (
-                                <div key={i} className={`${entry.type === "error" ? "text-red-500" : entry.type === "success" ? "text-green-300" : "text-green-400"}`}>
-                                    {entry.type === "input" ? (
-                                        <div className="flex gap-2">
-                                            <span className={`${isChatMode ? "text-cyan-500" : "text-green-600"}`}>➜</span>
-                                            <span>{entry.content}</span>
-                                        </div>
-                                    ) : (
-                                        <div>{entry.content}</div>
-                                    )}
-                                </div>
-                            ))}
-
-                            {/* Typing Indicator */}
-                            {isTyping && (
-                                <div className="text-cyan-500 animate-pulse">
-                                    System is processing...
-                                </div>
-                            )}
-
-                            {/* Input Line */}
-                            <div className="flex gap-2 items-center">
-                                <span className={`${isChatMode ? "text-cyan-500" : "text-green-600"}`}>➜</span>
-                                <input
-                                    ref={inputRef}
-                                    type="text"
-                                    value={input}
-                                    onChange={(e) => setInput(e.target.value)}
-                                    onKeyDown={(e) => {
-                                        if (e.key === "Enter") handleCommand(input);
-                                    }}
-                                    className={`bg-transparent border-none outline-none flex-1 placeholder-green-900 ${isChatMode ? "text-cyan-400" : "text-green-400"}`}
-                                    autoFocus
-                                    spellCheck={false}
-                                    placeholder={isChatMode ? "Ask something..." : ""}
-                                />
-                                <span className={`animate-pulse w-2 h-4 block ${isChatMode ? "bg-cyan-500" : "bg-green-500"}`}></span>
-                            </div>
-                        </div>
-
-                        {/* Scanline Overlay */}
-                        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%] z-10 opacity-20"></div>
-                        <div className={`absolute inset-0 pointer-events-none animate-pulse z-0 ${isChatMode ? "bg-cyan-900/10" : "bg-green-500/5"}`}></div>
-                    </motion.div>
-
-                    <style jsx>{`
-                        .terminal-scanline {
-                            box-shadow: 0 0 20px ${isChatMode ? "rgba(0, 255, 255, 0.15)" : "rgba(0, 255, 0, 0.1)"};
-                        }
-                    `}</style>
+        <div className="w-[700px] h-[500px] bg-[#0c0c0c]/90 text-green-400 font-mono flex flex-col relative overflow-hidden" onClick={() => inputRef.current?.focus()}>
+            {/* Header mapped via standard macOS wrapper UI but customized inside */}
+            <div id="window-header" className="flex items-center justify-between px-4 py-3 bg-[#1a1a1a] border-b border-white/10 select-none">
+                <div className="flex items-center gap-2 text-green-500">
+                    <TerminalIcon size={16} />
+                    <span className="font-bold">root@ayaskant-portfolio:~</span>
                 </div>
-            )}
-        </AnimatePresence>
+                <WindowControls target="realterminal" />
+            </div>
+
+            {/* Body */}
+            <div
+                ref={scrollRef}
+                className="flex-1 p-4 overflow-y-auto space-y-2 text-sm z-10 custom-scrollbar"
+                style={{
+                    scrollbarWidth: 'thin',
+                    scrollbarColor: '#064e3b transparent',
+                }}
+            >
+                {history.map((entry, i) => (
+                    <div key={i} className={`${entry.type === "error" ? "text-red-500" : entry.type === "success" ? "text-green-300" : "text-green-400"}`}>
+                        {entry.type === "input" ? (
+                            <div className="flex gap-2">
+                                <span className={`${isChatMode ? "text-cyan-500" : "text-green-600"}`}>➜</span>
+                                <span>{entry.content}</span>
+                            </div>
+                        ) : (
+                            <div>{entry.content}</div>
+                        )}
+                    </div>
+                ))}
+
+                {isTyping && (
+                    <div className="text-cyan-500 animate-pulse">
+                        System is processing...
+                    </div>
+                )}
+
+                <div className="flex gap-2 items-center">
+                    <span className={`${isChatMode ? "text-cyan-500" : "text-green-600"}`}>➜</span>
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") handleCommand(input);
+                        }}
+                        className={`bg-transparent border-none outline-none flex-1 ${isChatMode ? "text-cyan-400" : "text-green-400"}`}
+                        autoFocus
+                        spellCheck={false}
+                        placeholder={isChatMode ? "Ask something..." : ""}
+                    />
+                    <span className={`animate-pulse w-2 h-4 block ${isChatMode ? "bg-cyan-500" : "bg-green-500"}`}></span>
+                </div>
+            </div>
+
+            {/* Scanline Overlay */}
+            <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%] z-20 opacity-20"></div>
+            <div className={`absolute inset-0 pointer-events-none animate-pulse z-0 ${isChatMode ? "bg-cyan-900/10" : "bg-green-500/5"}`}></div>
+
+            <style>{`
+                #realterminal {
+                    box-shadow: 0 0 20px ${isChatMode ? "rgba(0, 255, 255, 0.15)" : "rgba(0, 255, 0, 0.1)"};
+                }
+            `}</style>
+        </div>
     );
-}
+};
+
+export default WindowWrapper(RealTerminal, "realterminal");

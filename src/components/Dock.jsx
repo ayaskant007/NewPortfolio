@@ -62,17 +62,17 @@ const Dock = () => {
   const toggleApp = (app) => {
     if(!app.canOpen) return;
 
-    const window = windows[app.id];
+    const win = useWindowStore.getState().windows?.[app.id];
 
-    if(!window) {
-        console.error("Window config not found for", app.id);
+    if(!win) {
+        console.warn("Window config not found for", app.id);
         return;
     }
 
-    if(window.isOpen) {
-        closeWindow(app.id);
+    if(win.isOpen && !win.isMinimized && useWindowStore.getState().activeWindow === app.id) {
+        useWindowStore.getState().minimizeWindow(app.id);
     } else {
-        openWindow(app.id);
+        useWindowStore.getState().openWindow(app.id);
     }
   };
 
@@ -83,6 +83,7 @@ const Dock = () => {
           <div key={id} className="relative flex justify-center">
             <button
               type="button"
+              id={`dock-icon-${id}`}
               className="dock-icon"
               aria-label={name}
               data-tooltip-id="dock-tooltip"
@@ -97,6 +98,9 @@ const Dock = () => {
                 loading="lazy"
                 className={canOpen ? "" : "opacity-60"}
               ></img>
+              {windows[id]?.isOpen && (
+                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 size-1 bg-black dark:bg-white rounded-full"></div>
+              )}
             </button>
           </div>
         ))}

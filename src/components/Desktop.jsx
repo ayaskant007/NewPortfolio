@@ -17,17 +17,23 @@ const Desktop = () => {
   };
 
   useGSAP(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || typeof Draggable === "undefined") return;
     
-    const draggables = Draggable.create(".desktop-icon", {
-      type: "x,y",
-      bounds: containerRef.current,
-      zIndexBoost: false,
-    });
+    try {
+      const draggables = Draggable.create(".desktop-icon", {
+        type: "x,y",
+        bounds: containerRef.current,
+        zIndexBoost: false,
+      });
 
-    return () => {
-      draggables.forEach((d) => d.kill());
-    };
+      return () => {
+        if (draggables && Array.isArray(draggables)) {
+          draggables.forEach((d) => d.kill());
+        }
+      };
+    } catch (err) {
+      console.warn("Desktop Draggable initialization skipped:", err);
+    }
   }, { scope: containerRef });
 
   return (
