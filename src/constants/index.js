@@ -108,9 +108,9 @@ const gallery = [
 ];
 
 const wallpapers = [
-  { id: 1, name: "Sonoma", path: "/images/wallpaper.png" },
+  { id: 1, name: "Tahoe", path: "/images/wallpaper.png" },
   { id: 2, name: "Sequoia", path: "/images/wallpaper-2.png" },
-  { id: 3, name: "Tahoe", path: "/images/wallpaper-3.png" },
+  { id: 3, name: "Sonoma", path: "/images/wallpaper-3.png" },
   { id: 4, name: "Ventura", path: "/images/wallpaper-4.png" },
 ];
 
@@ -278,7 +278,7 @@ const ABOUT_LOCATION = {
       kind: "file",
       fileType: "img",
       position: "top-10 left-5",
-      imageUrl: "/images/avatar.png",
+      imageUrl: "/images/marinapp.jpg",
     },
     {
       id: 4,
@@ -288,12 +288,12 @@ const ABOUT_LOCATION = {
       fileType: "txt",
       position: "top-60 left-5",
       subtitle: "Meet the Developer Behind the Code",
-      image: "/images/avatar.png",
+      image: "/images/ProfileP.png",
       description: [
-        "Hey! I'm Ayaskant Sahoo 👋 — a Developer and Student from New Delhi, India.",
+        "Hey! I'm Ayaskant Sahoo 👋 - a Developer and Student from New Delhi, India.",
         "I build high-performance web experiences, games, and interactive software using diverse tech stacks including React, GSAP, Unity, and Python.",
         "I'm the Lead Developer at The Tech Mobius Club at Indraprastha International School, and an active member of Hack Club.",
-        "When I'm not coding, you'll find me designing game levels, experimenting with animations, or building something new just for fun 🚀",
+        "When I'm not coding, you'll find me designing game levels, experimenting with animations, or building something new just for fun.",
       ],
     },
   ],

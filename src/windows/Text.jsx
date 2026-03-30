@@ -15,7 +15,7 @@ const Text = () => {
         <h2>{data.name}</h2>
       </div>
 
-      <div className="p-6 flex flex-col gap-4 overflow-y-auto w-full h-full pb-10 text-gray-800">
+      <div className="p-6 flex flex-col gap-4 overflow-y-auto w-full h-full pb-10 text-gray-800 dark:text-gray-200 transition-colors">
         {data.image && (
           <img
             src={data.image}
