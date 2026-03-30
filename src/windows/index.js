@@ -1,10 +1,10 @@
-import Terminal from "./Terminal";
-import Safari from "./Safari";
-import Resume from "./Resume";
-import Finder from "./Finder";
-import Text from "./Text";
-import Image from "./Image";
-import Contact from "./Contact";
-import Photos from "./Photos";
-
-export { Terminal, Safari, Resume, Finder, Text, Image, Contact, Photos };
+export { default as Terminal } from "./Terminal";
+export { default as Safari } from "./Safari";
+export { default as Resume } from "./Resume";
+export { default as Finder } from "./Finder";
+export { default as Text } from "./Text";
+export { default as Image } from "./Image";
+export { default as Contact } from "./Contact";
+export { default as Photos } from "./Photos";
+export { default as Notes } from "./Notes";
+export { default as Settings } from "./Settings";

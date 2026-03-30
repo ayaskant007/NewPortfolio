@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Georama:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
 
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
 
 html,
 body {
   width: 100dvw;
   overflow: hidden;
   height: 100dvh;
-  background-image: url("/images/wallpaper.png");
+  background-color: #000;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -33,39 +34,29 @@ body {
 
 @layer base {
   main {
-    @apply w-dvw h-dvh overflow-hidden;
+    @apply w-dvw h-dvh overflow-hidden relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.6s ease;
   }
 
-  nav {
-    @apply flex justify-between items-center bg-white/50 backdrop-blur-3xl p-2 px-5 select-none;
-
-    div {
-      @apply flex items-center max-sm:w-full max-sm:justify-center gap-5;
-
-      &:last-child {
-        @apply max-sm:hidden;
-      }
-    }
-
-    ul {
-      @apply flex items-center gap-5 max-sm:hidden;
-
-      p {
-        @apply text-sm cursor-pointer hover:underline transition-all;
-      }
-    }
-
-    time {
-      @apply text-sm font-medium text-black;
-    }
+  /* Dark mode text defaults */
+  main.dark {
+    color-scheme: dark;
   }
 }
 
 @layer components {
   .icon {
-    @apply p-1 hover:bg-gray-200 rounded hover:cursor-default;
+    @apply p-1 hover:bg-gray-200/30 rounded hover:cursor-default;
   }
 
+  .icon-hover {
+    @apply hover:opacity-70 transition-opacity;
+  }
+
+  /* ── Welcome ── */
   #welcome {
     @apply text-gray-200 flex flex-col justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none max-sm:h-screen max-sm:w-full max-sm:px-10;
 
@@ -78,11 +69,12 @@ body {
     }
   }
 
+  /* ── Dock ── */
   #dock {
-    @apply absolute bottom-5 left-1/2 -translate-x-1/2 z-50 select-none max-sm:hidden;
+    @apply absolute bottom-3 left-1/2 -translate-x-1/2 z-50 select-none max-sm:hidden;
 
     .dock-container {
-      @apply bg-white/20 backdrop-blur-md justify-between rounded-2xl p-1.5 flex items-end gap-1.5;
+      @apply backdrop-blur-md justify-between rounded-2xl p-1.5 flex items-end gap-1.5;
     }
 
     .tooltip {
@@ -98,118 +90,29 @@ body {
     }
   }
 
+  /* ── Window Controls ── */
   #window-controls {
     @apply flex gap-2;
-
-    .close {
-      @apply size-3.5 rounded-full bg-[#ff6157] cursor-pointer;
-    }
-
-    .minimize {
-      @apply size-3.5 rounded-full bg-[#ffc030];
-    }
-
-    .maximize {
-      @apply size-3.5 rounded-full bg-[#2acb42];
-    }
   }
 
+  /* ── Window Header ── */
   #window-header {
-    @apply flex items-center justify-between px-4 py-3 rounded-t-lg bg-gray-50 border-b border-gray-200 select-none text-sm text-gray-400;
+    @apply flex items-center justify-between px-4 py-3 rounded-t-lg select-none text-sm;
   }
 
+  /* ── Safari ── */
   #safari {
-    @apply w-4xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
-
-    .search {
-      @apply flex items-center gap-3 w-2/3 bg-white border border-gray-300 rounded-lg px-3 py-2;
-
-      input {
-        @apply placeholder:text-gray-400;
-      }
-    }
-
-    .blog {
-      @apply bg-white p-10 max-w-3xl mx-auto;
-
-      h2 {
-        @apply text-xl font-bold text-pink-600 mb-10;
-      }
-
-      .blog-post {
-        @apply grid grid-cols-12 space-x-5;
-
-        img {
-          @apply size-full rounded-md object-cover;
-        }
-
-        .content {
-          @apply col-span-10 space-y-3;
-
-          p {
-            @apply text-xs text-gray-500;
-          }
-
-          h3 {
-            @apply font-semibold text-base text-gray-800;
-          }
-
-          a {
-            @apply text-blue-600 text-xs hover:underline flex items-center gap-3;
-          }
-        }
-      }
-    }
+    @apply w-4xl absolute top-32 left-2/12 shadow-2xl rounded-xl overflow-hidden;
   }
 
+  /* ── Terminal ── */
   #terminal {
-    @apply w-xl absolute top-32 left-1/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
-
-    h2 {
-      @apply font-bold text-sm text-center w-full;
-    }
-
-    .techstack {
-      @apply text-sm font-roboto p-5;
-
-      .label {
-        @apply flex items-center ms-10 mt-7;
-      }
-
-      .content {
-        @apply py-5 my-5 border-y border-dashed space-y-1;
-
-        li {
-          .check {
-            @apply text-[#00A154] w-5;
-          }
-
-          h3 {
-            @apply font-semibold text-[#00A154] w-32 ms-5;
-          }
-
-          ul {
-            @apply flex items-center gap-3;
-          }
-        }
-      }
-
-      .footnote {
-        @apply text-[#00A154] space-y-1;
-
-        p {
-          @apply flex items-center;
-
-          svg {
-            @apply w-5 me-5;
-          }
-        }
-      }
-    }
+    @apply w-xl absolute top-32 left-1/12 shadow-2xl rounded-xl overflow-hidden bg-[#0c0c0c];
   }
 
+  /* ── Contact ── */
   #contact {
-    @apply max-w-2xl absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply max-w-2xl absolute top-60 left-5/12 shadow-2xl rounded-xl overflow-hidden bg-white dark:bg-[#1e1e1e] dark:text-gray-100 transition-colors;
 
     h2 {
       @apply font-bold text-sm text-center w-full;
@@ -236,11 +139,12 @@ body {
     }
   }
 
+  /* ── Photos ── */
   #photos {
-    @apply max-w-3xl absolute top-96 left-1/2 -translate-y-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply max-w-3xl absolute top-96 left-1/2 -translate-y-1/2 shadow-2xl rounded-xl overflow-hidden bg-white dark:bg-[#1e1e1e] dark:text-gray-100 transition-colors;
 
     .sidebar {
-      @apply w-3/12 flex-none bg-gray-50 border-r border-gray-200 flex flex-col p-5;
+      @apply w-3/12 flex-none border-r flex flex-col p-5 bg-gray-50 border-gray-200 dark:bg-[#151515] dark:border-white/10 transition-colors;
 
       h2 {
         @apply text-xs font-medium text-gray-400 mb-1;
@@ -252,7 +156,7 @@ body {
 
           &.active,
           &:hover {
-            @apply bg-blue-100 text-blue-700;
+            @apply bg-blue-100 text-blue-700 dark:bg-blue-500/80 dark:text-white transition-colors;
           }
 
           img {
@@ -297,8 +201,9 @@ body {
     }
   }
 
+  /* ── Resume ── */
   #resume {
-    @apply w-fit h-fit absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-fit h-fit absolute top-16 left-7/12 shadow-2xl rounded-xl overflow-hidden bg-white dark:bg-[#1e1e1e] dark:text-gray-100 transition-colors;
 
     #window-header {
       h2 {
@@ -307,8 +212,9 @@ body {
     }
   }
 
+  /* ── Finder ── */
   #finder {
-    @apply absolute w-3xl left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl;
+    @apply absolute w-3xl left-40 top-20 shadow-2xl overflow-hidden rounded-xl;
 
     .sidebar {
       @apply w-48 bg-gray-50 border-r border-gray-200 flex flex-col p-5 space-y-3;
@@ -351,16 +257,28 @@ body {
     }
   }
 
+  /* ── Notes ── */
+  #notes {
+    @apply w-3xl absolute top-28 left-3/12 shadow-2xl rounded-xl overflow-hidden;
+  }
+
+  /* ── Settings ── */
+  #settings {
+    @apply w-3xl absolute top-24 left-4/12 shadow-2xl rounded-xl overflow-hidden;
+  }
+
+  /* ── Text File ── */
   #txtfile {
-    @apply w-md absolute top-36 right-32 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-md absolute top-36 right-32 shadow-2xl rounded-xl overflow-hidden bg-white dark:bg-[#1e1e1e] dark:text-gray-100 transition-colors;
 
     h2 {
       @apply font-bold text-sm text-center w-full;
     }
   }
 
+  /* ── Image File ── */
   #imgfile {
-    @apply w-xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-xl absolute top-40 left-2/12 shadow-2xl rounded-xl overflow-hidden bg-white dark:bg-[#1e1e1e] dark:text-gray-100 transition-colors;
 
     #window-header {
       p {
@@ -369,7 +287,7 @@ body {
     }
 
     .preview {
-      @apply p-2 bg-gray-200 max-h-[70vh];
+      @apply p-2 max-h-[70vh] bg-gray-200 dark:bg-black/50 transition-colors;
 
       img {
         @apply w-full h-fit object-contain object-center;
@@ -377,6 +295,7 @@ body {
     }
   }
 
+  /* ── Home / Desktop ── */
   #home {
     @apply relative z-0 max-sm:hidden;
 
@@ -393,5 +312,24 @@ body {
         }
       }
     }
+  }
+
+  /* ── Range Slider Custom ── */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 4px;
+    outline: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
   }
 }
