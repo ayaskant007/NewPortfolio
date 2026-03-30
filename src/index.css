@@ -250,7 +250,8 @@ body {
         li {
           @apply flex space-y-1 items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-colors;
 
-          &:first-child {
+          &.active,
+          &:hover {
             @apply bg-blue-100 text-blue-700;
           }
 
