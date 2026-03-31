@@ -100,7 +100,6 @@ const Spotlight = () => {
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyDown={handleKeyDown}
                             placeholder="Spotlight Search"
-                            aria-label="Spotlight Search"
                             className={`flex-1 bg-transparent outline-none text-lg ${isDark
                                     ? "text-white placeholder:text-white/30"
                                     : "text-gray-800 placeholder:text-gray-400"

@@ -37,7 +37,7 @@ const useWindowStore = create(
     focusWindow: (windowKey) =>
       set((state) => {
         const win = state.windows[windowKey];
-        if (!win || !win.isOpen) return;
+        if (!win) return;
         win.zIndex = state.nextZIndex++;
         state.focusedWindow = windowKey;
       }),
@@ -55,7 +55,7 @@ const useWindowStore = create(
     restoreWindow: (windowKey) =>
       set((state) => {
         const win = state.windows[windowKey];
-        if (!win || !win.isOpen) return;
+        if (!win) return;
         win.isMinimized = false;
         win.zIndex = state.nextZIndex++;
         state.focusedWindow = windowKey;

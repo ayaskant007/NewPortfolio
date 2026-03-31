@@ -10,8 +10,7 @@ const WindowWrapper = (Component, windowKey) => {
     const { isOpen, zIndex, isMinimized, isMaximized } = windows[windowKey];
     const ref = useRef(null);
     const prevMaximized = useRef(false);
-    const savedMinimizePosition = useRef({ x: 0, y: 0 });
-    const savedMaximizePosition = useRef({ x: 0, y: 0, width: null, height: null });
+    const savedPosition = useRef({ x: 0, y: 0, width: null, height: null });
 
     useGSAP(
       () => {
@@ -20,13 +19,13 @@ const WindowWrapper = (Component, windowKey) => {
 
         if (isMinimized) {
           // Save position before minimizing so we know exactly where to restore it
-          savedMinimizePosition.current.x = gsap.getProperty(el, "x");
-          savedMinimizePosition.current.y = gsap.getProperty(el, "y");
+          savedPosition.current.x = gsap.getProperty(el, "x");
+          savedPosition.current.y = gsap.getProperty(el, "y");
 
           let targetX = window.innerWidth / 2;
           let targetY = window.innerHeight;
           const dockIcon = document.getElementById(`dock-${windowKey}`);
-
+          
           if (dockIcon) {
             const dockRect = dockIcon.getBoundingClientRect();
             targetX = dockRect.left + dockRect.width / 2;
@@ -41,8 +40,8 @@ const WindowWrapper = (Component, windowKey) => {
           gsap.to(el, {
             scale: 0.1,
             opacity: 0,
-            x: savedMinimizePosition.current.x + (targetX - elCenterX),
-            y: savedMinimizePosition.current.y + (targetY - elCenterY),
+            x: savedPosition.current.x + (targetX - elCenterX),
+            y: savedPosition.current.y + (targetY - elCenterY),
             duration: 0.45,
             ease: "back.in(1)", // A slight pull-back before zooming down
             onComplete: () => {
@@ -57,8 +56,8 @@ const WindowWrapper = (Component, windowKey) => {
           gsap.set(el, { visibility: "visible" });
           gsap.to(el, {
             scale: 1,
-            x: savedMinimizePosition.current.x || 0,
-            y: savedMinimizePosition.current.y || 0,
+            x: savedPosition.current.x || 0,
+            y: savedPosition.current.y || 0,
             opacity: 1,
             duration: 0.5,
             ease: "back.out(1)", // A slight pop-out past 100% scale
@@ -70,8 +69,8 @@ const WindowWrapper = (Component, windowKey) => {
         if (isMaximized && !prevMaximized.current) {
           // Save current position for unmaximize
           const transform = gsap.getProperty(el, "x");
-          savedMaximizePosition.current.x = typeof transform === "number" ? transform : 0;
-          savedMaximizePosition.current.y = gsap.getProperty(el, "y") || 0;
+          savedPosition.current.x = typeof transform === "number" ? transform : 0;
+          savedPosition.current.y = gsap.getProperty(el, "y") || 0;
 
           gsap.to(el, {
             position: "fixed",
@@ -94,8 +93,8 @@ const WindowWrapper = (Component, windowKey) => {
             left: "",
             width: "",
             height: "",
-            x: savedMaximizePosition.current.x,
-            y: savedMaximizePosition.current.y,
+            x: savedPosition.current.x,
+            y: savedPosition.current.y,
             borderRadius: "0.75rem",
             duration: 0.5,
             ease: "expo.inOut",

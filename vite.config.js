@@ -9,15 +9,10 @@ export default defineConfig({
   resolve : {
     alias: {
       '#components': resolve(dirname(fileURLToPath(import.meta.url)), 'src/components'),
-      '#components/*': resolve(dirname(fileURLToPath(import.meta.url)), 'src/components/*'),
       '#constants': resolve(dirname(fileURLToPath(import.meta.url)), 'src/constants'),
-      '#constants/*': resolve(dirname(fileURLToPath(import.meta.url)), 'src/constants/*'),
       '#store': resolve(dirname(fileURLToPath(import.meta.url)), 'src/store'),
-      '#store/*': resolve(dirname(fileURLToPath(import.meta.url)), 'src/store/*'),
       '#hoc': resolve(dirname(fileURLToPath(import.meta.url)), 'src/hoc'),
-      '#hoc/*': resolve(dirname(fileURLToPath(import.meta.url)), 'src/hoc/*'),
-      '#windows': resolve(dirname(fileURLToPath(import.meta.url)), 'src/windows'),
-      '#windows/*': resolve(dirname(fileURLToPath(import.meta.url)), 'src/windows/*')
+      '#windows': resolve(dirname(fileURLToPath(import.meta.url)), 'src/windows')
     }
   }
 })

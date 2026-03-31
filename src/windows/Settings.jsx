@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { WindowControls } from "#components";
 import WindowWrapper from "#hoc/WindowWrapper";
 import useThemeStore from "#store/theme";
@@ -8,19 +8,6 @@ import { Sun, Moon, Monitor, Paintbrush } from "lucide-react";
 const Settings = () => {
     const { isDark, setDark, wallpaper, setWallpaper } = useThemeStore();
     const [activeTab, setActiveTab] = useState("appearance");
-    const [prefersDark, setPrefersDark] = useState(false);
-
-    useEffect(() => {
-        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-        setPrefersDark(mediaQuery.matches);
-
-        const handleChange = (e) => {
-            setPrefersDark(e.matches);
-        };
-
-        mediaQuery.addEventListener("change", handleChange);
-        return () => mediaQuery.removeEventListener("change", handleChange);
-    }, []);
 
     const tabs = [
         { id: "appearance", label: "Appearance", icon: Paintbrush },
@@ -138,7 +125,6 @@ const Settings = () => {
 
                             {/* Auto */}
                             <button
-                                onClick={() => setDark(prefersDark)}
                                 className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${isDark
                                         ? "border-white/10 bg-white/5 hover:bg-white/10"
                                         : "border-gray-200 hover:bg-gray-50"
