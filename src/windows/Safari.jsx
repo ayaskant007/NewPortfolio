@@ -39,7 +39,8 @@ const Safari = () => {
   };
 
   const addTab = () => {
-    const newId = Math.max(...tabs.map((t) => t.id)) + 1;
+    const safeMax = tabs.length === 0 ? 0 : Math.max(...tabs.map((t) => t.id));
+    const newId = safeMax + 1;
     const newTab = {
       id: newId,
       title: "New Tab",
@@ -79,7 +80,7 @@ const Safari = () => {
   };
 
   return (
-    <div className="flex flex-col h-full w-full h-[65vh] min-h-[400px]">
+    <div className="flex flex-col h-[65vh] w-full min-h-[400px]">
       {/* Toolbar */}
       <div id="window-header" style={glassToolbar}>
         <WindowControls target="safari" />

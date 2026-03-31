@@ -75,12 +75,14 @@ const Finder = () => {
         <div className="flex-1 flex justify-between items-center ml-4">
           <div className="flex items-center gap-2">
             <button
-              className={`p-1 rounded transition-colors ${isDark ? "hover:bg-white/10 text-white/40" : "hover:bg-black/5 text-gray-400"}`}
+              disabled
+              className={`p-1 rounded transition-colors opacity-40 cursor-not-allowed ${isDark ? "text-white/40" : "text-gray-400"}`}
             >
               <ChevronLeft size={18} />
             </button>
             <button
-              className={`p-1 rounded transition-colors ${isDark ? "hover:bg-white/10 text-white/40" : "hover:bg-black/5 text-gray-400"}`}
+              disabled
+              className={`p-1 rounded transition-colors opacity-40 cursor-not-allowed ${isDark ? "text-white/40" : "text-gray-400"}`}
             >
               <ChevronRight size={18} />
             </button>
@@ -94,12 +96,14 @@ const Finder = () => {
           <div className="flex items-center gap-4">
             <div className="flex bg-black/5 rounded-md overflow-hidden">
               <button
-                className={`p-1 flex items-center justify-center ${isDark ? "bg-white/20 text-white" : "bg-white text-black shadow-sm"}`}
+                disabled
+                className={`p-1 flex items-center justify-center opacity-60 cursor-not-allowed ${isDark ? "bg-white/20 text-white" : "bg-white text-black shadow-sm"}`}
               >
                 <LayoutGrid size={16} />
               </button>
               <button
-                className={`p-1 flex items-center justify-center ${isDark ? "text-white/50" : "text-gray-500"}`}
+                disabled
+                className={`p-1 flex items-center justify-center opacity-60 cursor-not-allowed ${isDark ? "text-white/50" : "text-gray-500"}`}
               >
                 <List size={16} />
               </button>
@@ -114,7 +118,8 @@ const Finder = () => {
               <input
                 type="text"
                 placeholder="Search"
-                className={`bg-transparent outline-none text-xs w-24 ${isDark ? "text-white placeholder-white/40" : "text-black placeholder-gray-500"}`}
+                disabled
+                className={`bg-transparent outline-none text-xs w-24 opacity-60 cursor-not-allowed ${isDark ? "text-white placeholder-white/40" : "text-black placeholder-gray-500"}`}
               />
             </div>
           </div>
@@ -154,8 +159,7 @@ const Finder = () => {
                   className="flex flex-col items-center gap-2 cursor-pointer group"
                 >
                   <div
-                    className="w-16 h-16 flex items-center justify-center rounded-lg group-hover:bg-black/5"
-                    style={isDark ? { transition: "background 0.2s" } : {}}
+                    className={`w-16 h-16 flex items-center justify-center rounded-lg transition-colors ${isDark ? "group-hover:bg-white/10" : "group-hover:bg-black/5"}`}
                   >
                     <img
                       src={item.icon}

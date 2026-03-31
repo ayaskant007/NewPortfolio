@@ -15,7 +15,7 @@ A highly immersive, physics-driven web portfolio built to meticulously replicate
 
 ## Tech Stack
 
-- **Framework:** React 18 + Vite
+- **Framework:** React 19 + Vite
 - **Styling:** Tailwind CSS v4 
 - **State Management:** Zustand
 - **Animations:** GSAP 3 + @gsap/react

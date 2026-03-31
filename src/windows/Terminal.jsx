@@ -6,7 +6,7 @@ const SYSTEM_PROMPT = `You are "AyaskantOS Kernel", a cyberpunk-themed system in
 DATA: Name: Ayaskant Sahoo. Role: Developer & Student. Location: New Delhi, India.
 Tech: C++, Python, C#, JavaScript, React, GSAP, Unity, Ren'Py.
 Projects: Parano!a (Unity Horror), Vikas Bhi Virasat Bhi (GSAP Website), The Last Ember (Ren'Py Novel).
-Contact: ayaskantsahoo007@gmail.com. GitHub: @ayaskant007.
+Contact: Available via GitHub @ayaskant007.
 RULES: Keep responses short and terminal-like (under 50 words). Use tech jargon. Refuse unrelated topics.`;
 
 const Terminal = () => {
@@ -48,6 +48,9 @@ const Terminal = () => {
     const apiKey = import.meta.env.VITE_GROQ_API_KEY;
     if (!apiKey) return { error: "System Error: GROQ API Key not found in environment." };
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
+
     try {
       const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
@@ -64,14 +67,20 @@ const Terminal = () => {
           temperature: 0.7,
           max_tokens: 150,
         }),
+        signal: controller.signal,
       });
 
+      clearTimeout(timeoutId);
       const data = await res.json();
       if (data.choices?.[0]?.message?.content) {
         return { success: data.choices[0].message.content };
       }
       return { error: data.error?.message || "No response received." };
     } catch (e) {
+      clearTimeout(timeoutId);
+      if (e.name === "AbortError") {
+        return { error: "Request timed out" };
+      }
       return { error: `Connection failed: ${e.message}` };
     }
   };
@@ -291,13 +300,13 @@ const Terminal = () => {
           <p>Loading project modules...</p>
           <ul className="space-y-1 mt-2">
             <li>
-              <a href="https://github.com/foglomon/Paranoia" target="_blank" className="text-green-300 hover:underline">[DIR] Parano!a</a> - Unity/C# Thriller Game
+              <a href="https://github.com/foglomon/Paranoia" target="_blank" rel="noopener noreferrer" className="text-green-300 hover:underline">[DIR] Parano!a</a> - Unity/C# Thriller Game
             </li>
             <li>
-              <a href="https://vikasvirasat.netlify.app/" target="_blank" className="text-green-300 hover:underline">[WEB] Vikas Bhi, Virasat Bhi</a> - GSAP 3 Website
+              <a href="https://vikasvirasat.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-green-300 hover:underline">[WEB] Vikas Bhi, Virasat Bhi</a> - GSAP 3 Website
             </li>
             <li>
-              <a href="https://github.com/ayaskant007/The-Last-Ember" target="_blank" className="text-green-300 hover:underline">[DIR] The Last Ember</a> - Ren'Py Visual Novel
+              <a href="https://github.com/ayaskant007/The-Last-Ember" target="_blank" rel="noopener noreferrer" className="text-green-300 hover:underline">[DIR] The Last Ember</a> - Ren'Py Visual Novel
             </li>
           </ul>
         </div>
@@ -307,9 +316,9 @@ const Terminal = () => {
     if (entry.isSocials) {
       return (
         <div key={i} className="text-green-400 flex gap-4 mt-1">
-          <a href="https://github.com/ayaskant007" target="_blank" className="underline hover:text-green-300">GitHub</a>
-          <a href="https://www.linkedin.com/in/ayaskant-sahoo/" target="_blank" className="underline hover:text-green-300">LinkedIn</a>
-          <a href="https://instagram.com/ayaskant_007" target="_blank" className="underline hover:text-green-300">Instagram</a>
+          <a href="https://github.com/ayaskant007" target="_blank" rel="noopener noreferrer" className="underline hover:text-green-300">GitHub</a>
+          <a href="https://www.linkedin.com/in/ayaskant-sahoo/" target="_blank" rel="noopener noreferrer" className="underline hover:text-green-300">LinkedIn</a>
+          <a href="https://instagram.com/ayaskant_007" target="_blank" rel="noopener noreferrer" className="underline hover:text-green-300">Instagram</a>
         </div>
       );
     }
@@ -385,6 +394,7 @@ const Terminal = () => {
             autoFocus
             spellCheck={false}
             placeholder={isChatMode ? "Ask something..." : ""}
+            aria-label="Terminal command input"
           />
           <span
             className={`animate-pulse w-2 h-4 block ${isChatMode ? "bg-cyan-500" : "bg-green-500"}`}
