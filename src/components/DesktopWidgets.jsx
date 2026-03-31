@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import useThemeStore from "#store/theme";
 import dayjs from "dayjs";
-import { Cloud, Sun, CloudRain } from "lucide-react";
+import { Cloud, Sun, CloudRain, CloudSun } from "lucide-react";
 
 const DesktopWidgets = () => {
     const isDark = useThemeStore((s) => s.isDark);
     const [time, setTime] = useState(dayjs());
     const [weather, setWeather] = useState(null);
+    const [weatherError, setWeatherError] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const interval = setInterval(() => setTime(dayjs()), 1000);
@@ -15,26 +17,45 @@ const DesktopWidgets = () => {
 
     // Fetch weather for New Delhi from Open-Meteo (free, no API key)
     useEffect(() => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+        setLoading(true);
         fetch(
             "https://api.open-meteo.com/v1/forecast?latitude=28.6139&longitude=77.209&current_weather=true&timezone=Asia/Kolkata",
+            { signal: controller.signal }
         )
             .then((r) => r.json())
             .then((data) => {
+                clearTimeout(timeoutId);
                 if (data.current_weather) {
                     setWeather({
                         temp: Math.round(data.current_weather.temperature),
                         code: data.current_weather.weathercode,
                     });
+                    setWeatherError(false);
+                } else {
+                    setWeatherError(true);
                 }
+                setLoading(false);
             })
             .catch(() => {
-                setWeather({ temp: 28, code: 0 });
+                clearTimeout(timeoutId);
+                setWeatherError(true);
+                setWeather(null);
+                setLoading(false);
             });
+
+        return () => {
+            clearTimeout(timeoutId);
+            controller.abort();
+        };
     }, []);
 
     const getWeatherIcon = (code) => {
         if (code >= 61) return <CloudRain size={28} />;
         if (code >= 2) return <Cloud size={28} />;
+        if (code >= 1) return <CloudSun size={28} />;
         return <Sun size={28} />;
     };
 
@@ -82,7 +103,7 @@ const DesktopWidgets = () => {
             </div>
 
             {/* Weather Widget */}
-            {weather && (
+            {!loading && !weatherError && weather && (
                 <div className="rounded-2xl p-4 w-40" style={glassStyle}>
                     <div className="flex items-center justify-between">
                         <div>
