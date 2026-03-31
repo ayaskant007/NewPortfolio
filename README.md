@@ -1,4 +1,4 @@
-# AyaskantOS — The macOS Portfolio
+# Portfolio v2 — The macOS Portfolio
 
 A highly immersive, physics-driven web portfolio built to meticulously replicate the modern macOS architecture (Sonoma/Sequoia). Engineered from the ground up using React, GSAP 3, and Tailwind CSS v4 to deliver a pixel-perfect liquid glass experience directly in the browser.
 
