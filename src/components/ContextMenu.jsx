@@ -23,7 +23,14 @@ const ContextMenu = () => {
             }
 
             e.preventDefault();
-            setPosition({ x: e.clientX, y: e.clientY });
+
+            // Measure menu dimensions and clamp position to viewport
+            const menuWidth = menuRef.current?.offsetWidth || 0;
+            const menuHeight = menuRef.current?.offsetHeight || 0;
+            const clampedX = Math.max(0, Math.min(e.clientX, window.innerWidth - menuWidth));
+            const clampedY = Math.max(0, Math.min(e.clientY, window.innerHeight - menuHeight));
+
+            setPosition({ x: clampedX, y: clampedY });
             setIsOpen(true);
         };
 
