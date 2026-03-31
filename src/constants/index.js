@@ -31,7 +31,7 @@ const blogPosts = [
     date: "Mar 15, 2026",
     title: "Building Parano!a: A Deep Dive into Unity Horror Game Development",
     content:
-      "Parano!a is a psychological thriller game I built with Unity and C#. The game features 3 intense levels designed to evoke fear and uncertainty. Key challenges included implementing dynamic lighting for atmosphere, creating an AI-driven enemy patrol system, and designing sound cues that respond to player proximity. The 3D modeling was done in Blender, with custom shaders for the eerie visual effects.",
+      "Parano!a is a psychological thriller game I built with Unity and C#. The game features 3 intense levels designed to evoke fear and uncertainty. Key challenges included implementing dynamic lighting for atmosphere, creating an AI-driven enemy patrol system. The major challenge was how to host the entire project on Github, since the project size exceeded the limits. I overcame this by using Git LFS to manage large files and optimizing assets to reduce overall size. The result is a gripping horror experience that you can play for free on itch.io! Created for Daydream Delhi 2025 & Daydream Global 2025 (Ranked #150 Globablly)",
     link: "https://github.com/foglomon/Paranoia",
   },
   {
@@ -50,13 +50,35 @@ const blogPosts = [
       "The Last Ember is a narrative-driven visual novel built using Ren'Py and Python. The game explores themes of survival and sacrifice through branching storylines. I created the digital art assets and wrote the entire narrative. The difficulty system was tuned to create a genuinely challenging survival experience where every choice matters.",
     link: "https://github.com/ayaskant007/The-Last-Ember",
   },
+  {
+    id: 4,
+    date: "March 3, 2026",
+    title: "Xeon Horizon: A high-performance, 35mm tall programmer's macropad",
+    content:
+      "Xeon Horizon is a high performance, 35mm tall programmer's macropad powered by a Seed Studio XIAO RP2040. It is designed for ultra-fast workflows in code editors, featuring dedicated refactoring/debugging shortcuts, a rotary encoder for rapid code navigation, and a status 0.91\" OLED Display for real-time feedback. A unique feature of the Horizon is its upward-facing SK6812-MINI-E RBG Lighting, which shines directly through hollowed-out text on the top plate, to act as an agressive, high contrast indicator light. The Xeon Horizon is built with a custom PCB designed in KiCad, and the firmware is developed using QMK for advanced configuration and performance. It is housed in a frosted 3D printed case with a sleek, minimalist design. The project is open source and available on GitHub.",
+    link: "https://github.com/ayaskant007/Xeon-Horizon",
+  },
+  {
+    id: 5,
+    date: "March 14, 2026",
+    title: "Echo Motions: [Blog WIP]",
+    content: "[Blog WIP]",
+    link: "https://github.com/ayaskant007/Echo-Motions",
+  },
+  {
+    id: 6,
+    date: "March 14, 2026",
+    title: ".ayas Studio: [Blog WIP]",
+    content: "[Blog WIP]",
+    link: "https://github.com/ayaskant007/.ayas",
+  },
 ];
 
 const techStack = [
   { category: "Languages", items: ["C++", "Python", "C#", "JavaScript"] },
   { category: "Frontend", items: ["React", "Next.js", "HTML/CSS"] },
   { category: "Animation", items: ["GSAP 3", "Framer Motion"] },
-  { category: "Styling", items: ["Tailwind CSS", "Sass", "CSS"] },
+  { category: "Styling", items: ["Tailwind CSS", "CSS"] },
   { category: "Game Dev", items: ["Unity", "Ren'Py", "Blender"] },
   { category: "Dev Tools", items: ["Git", "GitHub", "VS Code"] },
 ];
@@ -105,6 +127,7 @@ const gallery = [
   { id: 2, img: "/images/gal2.png" },
   { id: 3, img: "/images/gal3.png" },
   { id: 4, img: "/images/gal4.png" },
+  { id: 5, img: "/images/gal5.png" },
 ];
 
 const wallpapers = [
@@ -182,8 +205,8 @@ const WORK_LOCATION = {
       name: "Vikas Bhi, Virasat Bhi",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-52 right-80",
-      windowPosition: "top-[20vh] left-7",
+      position: "top-[5vh] left-5",
+      windowPosition: "top-[20vh] left-5",
       children: [
         {
           id: 1,
@@ -225,7 +248,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-80",
-      windowPosition: "top-[33vh] left-7",
+      windowPosition: "top-[33vh] left-5",
       children: [
         {
           id: 1,
@@ -258,6 +281,132 @@ const WORK_LOCATION = {
           fileType: "img",
           position: "top-52 right-80",
           imageUrl: "/images/project-3.png",
+        },
+      ],
+    },
+    {
+      id: 8,
+      name: "Xeon Horizon",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-30 left-5",
+      windowPosition: "top-[50vh] left-5",
+      children: [
+        {
+          id: 1,
+          name: "Xeon Horizon Macropad.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "Xeon Horizon is a high performance, 35mm tall programmer's macropad powered by a Seed Studio XIAO RP2040.",
+            'It is designed for ultra-fast workflows in code editors, featuring dedicated refactoring/debugging shortcuts, a rotary encoder for rapid code navigation, and a status 0.91" OLED Display for real-time feedback.',
+            "A unique feature of the Horizon is its upward-facing SK6812-MINI-E RBG Lighting, which shines directly through hollowed-out text on the top plate, to act as an agressive, high contrast indicator light.",
+            "The Xeon Horizon is built with a custom PCB designed in KiCad, and the firmware is developed using QMK for advanced configuration and performance. It is housed in a frosted 3D printed case with a sleek, minimalist design. The project is open source and available on GitHub.",
+          ],
+        },
+        {
+          id: 2,
+          name: "Xeon_Horizon.github",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/ayaskant007/Xeon-Horizon",
+          position: "top-10 right-20",
+        },
+        {
+          id: 4,
+          name: "Xeon_Horizon.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 right-80",
+          imageUrl: "/images/project-4.png",
+        },
+      ],
+    },
+    {
+      id: 9,
+      name: "Echo Motions",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-30 left-5",
+      windowPosition: "top-[60vh] left-5",
+      children: [
+        {
+          id: 1,
+          name: "Echo Motions.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "Xeon Horizon is a high performance, 35mm tall programmer's macropad powered by a Seed Studio XIAO RP2040.",
+            "It is designed for ultra-fast workflows in code editors, featuring dedicated refactoring/debugging shortcuts, a rotary encoder for rapid code navigation, and a status 0.91\"",
+            "A unique feature of the Horizon is its upward-facing SK6812-MINI-E RBG Lighting, which shines directly through hollowed-out text on the top plate, to act as an agressive, high contrast indicator light.",
+            "The Xeon Horizon is built with a custom PCB designed in KiCad, and the firmware is developed using QMK for advanced configuration and performance. It is housed in a frosted 3D printed case with a sleek, minimalist design. The project is open source and available on GitHub.",
+          ],
+        },
+        {
+          id: 2,
+          name: "Echo_Motions.github",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/ayaskant007/Echo-Motions",
+          position: "top-10 right-20",
+        },
+        {
+          id: 4,
+          name: "Echo_Motion.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 right-80",
+          imageUrl: "/images/project-5.png",
+        },
+      ],
+    },
+    {
+      id: 10,
+      name: "Echo Motions",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-30 left-5",
+      windowPosition: "top-[70vh] left-5",
+      children: [
+        {
+          id: 1,
+          name: "Echo Motions.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "Xeon Horizon is a high performance, 35mm tall programmer's macropad powered by a Seed Studio XIAO RP2040.",
+            "It is designed for ultra-fast workflows in code editors, featuring dedicated refactoring/debugging shortcuts, a rotary encoder for rapid code navigation, and a status 0.91\"",
+            "A unique feature of the Horizon is its upward-facing SK6812-MINI-E RBG Lighting, which shines directly through hollowed-out text on the top plate, to act as an agressive, high contrast indicator light.",
+            "The Xeon Horizon is built with a custom PCB designed in KiCad, and the firmware is developed using QMK for advanced configuration and performance. It is housed in a frosted 3D printed case with a sleek, minimalist design. The project is open source and available on GitHub.",
+          ],
+        },
+        {
+          id: 2,
+          name: "Echo_Motions.github",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/ayaskant007/Echo-Motions",
+          position: "top-10 right-20",
+        },
+        {
+          id: 4,
+          name: "Echo_Motion.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 right-80",
+          imageUrl: "/images/project-5.png",
         },
       ],
     },
