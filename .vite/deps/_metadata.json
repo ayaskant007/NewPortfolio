@@ -1,0 +1,44 @@
+{
+  "hash": "87dbe932",
+  "configHash": "5533e1b4",
+  "lockfileHash": "76a23efa",
+  "browserHash": "92f9a151",
+  "optimized": {
+    "gsap": {
+      "src": "../../node_modules/gsap/index.js",
+      "file": "gsap.js",
+      "fileHash": "228513df",
+      "needsInterop": false
+    },
+    "gsap/Draggable": {
+      "src": "../../node_modules/gsap/Draggable.js",
+      "file": "gsap_Draggable.js",
+      "fileHash": "0632b44f",
+      "needsInterop": false
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "747498cb",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "f4e7e341",
+      "needsInterop": true
+    },
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "b1ec1615",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "react-Na5-BvaJ": {
+      "file": "react-Na5-BvaJ.js",
+      "isDynamicEntry": false
+    }
+  }
+}
